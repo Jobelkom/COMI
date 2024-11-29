@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vérification des Commissions</title>
+  <style>
+    /* Style global */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('assets/images/1xbet.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    /* Section pour le retrait */
+    .withdrawal-form {
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      margin: 20px auto;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    .withdrawal-form input,
+    .withdrawal-form select,
+    .withdrawal-form button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .withdrawal-form button {
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .withdrawal-form button:hover {
+      background-color: #218838;
+    }
+
+    /* Barre de progression */
+    .progress-bar-container {
+      width: 100%;
+      background-color: #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .progress-bar {
+      height: 20px;
+      width: 0;
+      background-color: green;
+      text-align: center;
+      color: white;
+      font-size: 0.9rem;
+      line-height: 20px;
+    }
+
+    .progress-bar.failed {
+      background-color: red;
+    }
+
+    /* Témoignages défilants */
+    .testimonials {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 250px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      overflow: hidden;
+      border-radius: 0 10px 0 0;
+    }
+
+    .testimonials h3 {
+      margin: 10px;
+      font-size: 1rem;
+    }
+
+    .testimonials ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .testimonials ul li {
+      padding: 10px;
+      border-bottom: 1px solid #444;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .testimonials ul li img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vérification des Commissions</h1>
+    <p>Gérez vos commissions et effectuez vos retraits rapidement.</p>
+  </header>
+
+  <!-- Formulaire de retrait -->
+  <div class="withdrawal-form">
+    <h2>Retrait</h2>
+    <select id="operator">
+      <option value="orange">Orange Money</option>
+      <option value="mtn">MTN Mobile Money</option>
+    </select>
+    <input type="text" id="phone" placeholder="Numéro de téléphone" />
+    <input type="number" id="amount" placeholder="Montant à retirer" />
+    <button onclick="processWithdrawal()">Effectuer le Retrait</button>
+
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progress-bar">0%</div>
+    </div>
+
+    <div id="message" style="color: yellow; font-weight: bold; margin-top: 10px;"></div>
+  </div>
+
+  <!-- Témoignages défilants -->
+  <div class="testimonials">
+    <h3>Témoignages</h3>
+    <ul id="testimonial-list">
+      <li>
+        <img src="assets/images/user1.jpeg" alt="User 1">
+        <span>Juliana : Ce programme est vraiment satisfaisant !</span>
+      </li>
+      <li>
+        <img src="assets/images/user2.jpeg" alt="User 2">
+        <span>Cameron : J'ai reçu mes commissions facilement.</span>
+      </li>
+      <li>
+        <img src="assets/images/user3.jpeg" alt="User 3">
+        <span>Alain : Les retraits sont rapides et efficaces.</span>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    // Témoignages défilants
+    const testimonialList = document.getElementById('testimonial-list');
+    setInterval(() => {
+      testimonialList.appendChild(testimonialList.firstElementChild);
+    }, 3000);
+
+    // Simulation de retrait
+    function processWithdrawal() {
+      const progressBar = document.getElementById('progress-bar');
+      const message = document.getElementById('message');
+      let progress = 0;
+
+      const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = progress + '%';
+        progressBar.textContent = progress + '%';
+
+        if (progress >= 99) {
+          clearInterval(interval);
+
+          // Condition d'échec
+          progressBar.classList.add('failed');
+          message.innerHTML =
+            "Retrait échoué. <br> Vous devez parrainer 20 personnes supplémentaires ou recharger 50 000 FCFA pour effectuer un retrait.";
+        }
+      }, 500);
+    }
+  </script>
+</body>
+</html>
